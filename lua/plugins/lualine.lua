@@ -11,6 +11,9 @@ return {
                     function()
                         return require("screenkey").get_keys()
                     end,
+                    function()
+                        return vim.fn['FugitiveStatusline']()
+                    end,
                 },
             },
         })
