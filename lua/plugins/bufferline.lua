@@ -11,12 +11,16 @@ return {
 
         bufferline.setup({})
 
-        utils.setKeymap("n", "<C-l>", function()
+        utils.setKeymap("n", "<A-l>", function()
             bufferline.cycle(1)
         end, { desc = "Bufferline: Next Buffer" })
 
-        utils.setKeymap("n", "<C-h>", function()
+        utils.setKeymap("n", "<A-h>", function()
             bufferline.cycle(-1)
         end, { desc = "Bufferline: Previous Buffer" })
+
+        utils.setKeymap("n", "<A-w>", function()
+            vim.api.nvim_buf_delete(0, { force = false })
+        end, { desc = "Bufferline: Close Current Buffer" })
     end
 }
