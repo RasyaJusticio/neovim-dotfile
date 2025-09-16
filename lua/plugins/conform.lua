@@ -11,6 +11,7 @@ return {
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
+                    markdown = { "prettier" },
 					html = { "prettier" },
 					css = { "prettier" },
 					javascript = { "prettier" },
@@ -23,7 +24,7 @@ return {
 				},
 			})
 
-			vim.keymap.set("n", "<leader>f", function()
+			vim.keymap.set({ "n", "v" }, "<leader>f", function()
 				conform.format()
 			end)
 		end,
