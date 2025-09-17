@@ -1,3 +1,12 @@
+local servers = {
+	"lua_ls",
+	"phpactor",
+	"laravel_ls",
+	"ts_ls",
+	"eslint",
+	"emmet_ls",
+}
+
 return {
 	{
 		"williamboman/mason.nvim",
@@ -10,34 +19,17 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				automatic_enable = false,
-				ensure_installed = {
-					"lua_ls",
-					"phpactor",
-					"laravel_ls",
-					"emmet_ls",
-					"eslint",
-				},
+				ensure_installed = servers,
 			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			vim.lsp.config("lua_ls", {
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-					},
-				},
-			})
-			vim.lsp.enable("lua_ls")
-
-			vim.lsp.enable("laravel_ls")
-			vim.lsp.enable("phpactor")
-			vim.lsp.enable("emmet_ls")
-			vim.lsp.enable("eslint")
+            for _, server in ipairs(servers) do
+                vim.lsp.config(server, require("lsp." .. server))
+			    vim.lsp.enable(server)
+            end
 		end,
 	},
 }
